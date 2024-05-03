@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Casino</title>
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: bisque;
+        }
+        #slot-machine {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+        .reel {
+            width: 100px;
+            height: 150px;
+            border: 1px solid #000;
+            margin: 0 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .symbols {
+            position: absolute;
+            transition: transform 1s ease-in-out;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1> Slot Machine</h1>
+    <div id="slot-machine">
+        <div class="reel" id="reel1">
+            <div class="symbols"></div>
+        </div>
+        <div class="reel" id="reel2">
+            <div class="symbols"></div>
+        </div>
+        <div class="reel" id="reel3">
+            <div class="symbols"></div>
+        </div>
+    </div>
+    <button onclick="spin()">Spin</button>
+
+    <script>
+        const symbols = ["🍒", "🍊", "🍋", "🍇", "🍉", "🍓"];
+
+        function getRandomSymbol() {
+            const randomIndex = Math.floor(Math.random() * symbols.length);
+            return symbols[randomIndex];
+        }
+
+        function spin() {
+            const reels = document.querySelectorAll('.reel');
+
+            reels.forEach((reel) => {
+                const symbolsContainer = reel.querySelector('.symbols');
+                const randomSymbol = getRandomSymbol();
+                symbolsContainer.innerHTML = `<p>${randomSymbol}</p>`;
+                symbolsContainer.style.transform = `translateY(-${symbolsContainer.clientHeight}px)`;
+                setTimeout(() => {
+                    symbolsContainer.style.transform = 'translateY(0)';
+                }, 50);
+            });
+        }
+    </script>
+</body>
+</html>
